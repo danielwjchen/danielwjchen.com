@@ -1,0 +1,21 @@
+{
+  "name": "danielwjchen.com",
+  "version": "1.0.0",
+  "description": "DanielWJChen.com is Daniel Chen's professional blog.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/s1300045/danielwjchen.com.git"
+  },
+  "author": "hello@danielwjchen.com",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/s1300045/danielwjchen.com#readme",
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}

@@ -18,18 +18,6 @@ npm
 0.10.42
 3.7.5
 
-
-
-
-
-
-
-
-
-
-
-
-
 ## Architecture
 Medicr.us is organized by features with 3 static pages as “apps” with the admin never completed. Stylesheets, images, and JavaScripts are separated into each folder. The gruntJS tasks simply list all the javascripts and concat them together into 1 giant file and minify. There is no dependency resolution, and there is only 1 packaged script file for the entire site.
 
@@ -42,14 +30,14 @@ Install nvm and the latest node lts
 nvm is kind of similar to pip and virtualenv. The difference is, nvm does not support multiple environment of the same minor version. This only becomes a problem when there are two projects of the same version of node, and each project requires different version of the same package. 
 
 `nvm install 8`
-Setup webpack
+### Setup webpack
 We are going to install the most current webpack available to out at the moment which is version 4.
 
-npm install --save-dev webpack webpack-cli
+`npm install --save-dev webpack webpack-cli`
  
-Install source-map-loader to help development
+### Install `source-map-loader` to help development
 
-npm install --save-dev  source-map-loader 
+`npm install --save-dev  source-map-loader `
 
 Configure
 Install source-map-loader to help development

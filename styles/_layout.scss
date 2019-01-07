@@ -1,0 +1,47 @@
+/**
+ * Defines layout
+ * @note Implements header to stick to the top, and footer to push to the bottom.
+ */
+$header-height: 56px;
+$footer-height-mobile: 280px;
+$footer-height-desktop: 195px;
+html,
+body {
+    height: 100%;
+}
+body {
+    padding-top: $header-height;
+    overflow-y: scroll;
+}
+body > .page-content {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-bottom: -$footer-height-mobile;
+}
+header {
+    height: $header-height;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+footer {
+    z-index: 2;
+    position: relative;
+    width: 100%;
+}
+.push,
+footer {
+    height: $footer-height-mobile;
+}
+@media only screen and (min-width : 768px) {
+    body > .page-content {
+        margin-bottom: -$footer-height-desktop;
+    }
+    .push,
+    footer {
+        height: $footer-height-desktop;
+    }
+}

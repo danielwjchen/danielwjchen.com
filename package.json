@@ -4,7 +4,8 @@
   "description": "DanielWJChen.com is Daniel Chen's professional blog.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "develop": "webpack-dev-server --config webpack.dev.js --watch",
+    "deploy": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -14,10 +15,21 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/s1300045/danielwjchen.com#readme",
   "devDependencies": {
+    "css-loader": "^2.1.0",
+    "jshint-loader": "^0.8.4",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9",
+    "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.1.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0"
+  }
 }

@@ -1,0 +1,22 @@
+//- Defines navbar
+nav.navbar.navbar-expand-sm.navbar-light.bg-light.fixed-top
+    a.nav-brand(
+        href="/"
+    )
+    button.navbar-toggler(
+        type='button' 
+        data-toggle='collapse'
+        data-target='#navbar'
+        aria-expanded='false'
+        aria-controls='navbar'
+    )
+        span.navbar-toggler-icon
+    div.navbar-collapse.collapse#navbar
+        ul.navbar-nav.navbar-right
+            each val in ['Home', 'Portfolio', 'Blog', 'Contact',]
+                li.nav-item(
+                    class=request.path.startsWith('/' + val.toLowerCase()) ? "active" : ""
+                )
+                    a.nav-link(
+                        href='/' + val.toLowerCase()
+                    )= val

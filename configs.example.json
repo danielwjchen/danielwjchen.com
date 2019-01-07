@@ -1,0 +1,20 @@
+{
+    "PRODUCTION": true,
+    "site": "DanielWJChen.com",
+    "contact": "",
+    "google": {
+        "analytics": "",
+        "conversionId": "",
+        "siteVerification": "",
+        "map": "",
+        "tagManager": ""
+    },
+    "bingSiteVerification": "",
+    "facebook": {
+        "appId": "",
+        "version": ""
+    },
+    "twitter": {
+        "site": ""
+    }
+}

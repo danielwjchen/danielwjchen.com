@@ -3,10 +3,9 @@
         .col
             ul.nav.justify-content-center
                 each item in navMenuItems
-                    li.nav-item(
-                        class=request.path.startsWith(item.url) ? "active" : ""
-                    )
+                    li.nav-item
                         a.nav-link(
+                            class=request.path.startsWith(item.url) ? "active" : ""
                             href=item.url
                         )=item.name
     .row

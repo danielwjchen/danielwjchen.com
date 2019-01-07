@@ -13,10 +13,10 @@ nav.navbar.navbar-expand-sm.navbar-light.bg-light.fixed-top
         span.navbar-toggler-icon
     div.navbar-collapse.collapse#navbar
         ul.navbar-nav.navbar-right
-            each val in ['Home', 'Portfolio', 'Blog', 'Contact',]
+            each item in navMenuItems
                 li.nav-item(
-                    class=request.path.startsWith('/' + val.toLowerCase()) ? "active" : ""
+                    class=request.path.startsWith(item.url) ? "active" : ""
                 )
                     a.nav-link(
-                        href='/' + val.toLowerCase()
-                    )= val
+                        href=item.url
+                    )=item.name

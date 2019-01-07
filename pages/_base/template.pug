@@ -50,9 +50,12 @@ html(
                 name="msvalidate.01",
                 content="#{configs.bingSiteVerification}"
             )
-        block meta
-        block link
-        block style
+        if style
+            link(
+                rel="stylesheet"
+                type="text/css"
+                href=style
+            )
     body
         header
             include includes/navbar
@@ -69,7 +72,11 @@ html(
             type="text/javascript"
             src="/node_modules/bootstrap/dist/js/bootstrap.min.js"
         )
-        block script
+        if script
+            script(
+                type="text/javascript"
+                src=script
+            )
 
         //-
             Google Analytics

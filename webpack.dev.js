@@ -7,7 +7,7 @@ var PageFactory = require('./PageFactory');
 module.exports = merge(common, {
   devtool: 'source-map',
   devServer: {
-    setup: function(app) {
+    before: function(app) {
         PageFactory(app);
     }
   },
@@ -18,16 +18,6 @@ module.exports = merge(common, {
   mode: 'development',
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        enforce: 'pre',
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'jshint-loader',
-          },
-        ],
-      },
       {
         test: /\.scss$/,
         use: [

@@ -12,7 +12,7 @@ module.exports = function(app) {
     app.set('view engine', 'pug');
     app.set('views', './pages/');
 
-    var HomePageClass = require(path.resolve(directory, 'home'));
+    var HomePageClass = require(path.resolve(directory, 'home', 'page'));
     var homePageInstance = new HomePageClass(configs);
     app.get('/', homePageInstance.get.bind(homePageInstance));
 
@@ -21,7 +21,7 @@ module.exports = function(app) {
             return ;
         }
 
-        var PageClass = require(path.resolve(directory, item));
+        var PageClass = require(path.resolve(directory, item, 'page'));
         var pageInstance = new PageClass(configs);
 
         ['get', 'post',].forEach(function(method) {

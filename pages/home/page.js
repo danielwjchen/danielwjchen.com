@@ -3,6 +3,8 @@ var pug = require('pug');
 
 var BasePage = require('../_base/page');
 
+var experience = require('./../../data/experience.json');
+
 class HomePage extends BasePage {
 
     getTitle() {
@@ -10,7 +12,12 @@ class HomePage extends BasePage {
     }
 
     getContent() {
-        return pug.renderFile(path.resolve(__dirname, 'content.pug'));
+        return pug.renderFile(
+            path.resolve(__dirname, 'content.pug'),
+            {
+                experience: experience,
+            }
+        );
     }
 
     getScript() {

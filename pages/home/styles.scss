@@ -1,9 +1,17 @@
 /**
  * Defines / styles
  */
+@import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
+
 .bg-landing {
-    background-image: url('/images/home/IMG_20190106_234517.jpg');
+    background-image: url('/images/home/landing.640.jpg');
+    @include media-breakpoint-up(sm) {
+        background-image: url('/images/home/landing.1280.jpg');
+    }
+    @include media-breakpoint-up(md) {
+        background-image: url('/images/home/landing.1920.jpg');
+    }
     background-repeat: no-repeat;
-    background-size: cover;
-    text-shadow: 0 0 5px black;
+    background-position: cover;
+    text-shadow: 0 0 8px black;
 }

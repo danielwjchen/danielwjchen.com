@@ -1,0 +1,75 @@
+[
+    {
+       "logo": "/images/company-logos/hangara.png",
+       "organization": "HangarA",
+       "position": "Software Engineer",
+       "dates": "August, 2016 - Present",
+       "summary": [
+           "Designed, developed, and deployed an door-to-door air freight booking system that automates many logistic interactions, e.g. flight look up, rate calculation, document creation and archival.",
+           "Managed roadmaps and deliverables following the Agile Methodology and worked with stakeholders to identify solution to real-world logistic scenarios.",
+           "Established the engineering team and participated in the recruiting and hiring effort."
+       ]
+    },
+    {
+       "logo": "/images/company-logos/sos.png",
+       "organization": "StickOutSocial",
+       "position": "Head of Software Development",
+       "dates": "April, 2015 - August, 2016",
+       "summary": [
+           "Designed, developed, and deployed client projects, e.g FleetMove.com, AdentisCG, ThSouce.com, and HangarA.",
+           "Provided technical insights and worked with sales and senior management to submit bids and win contracts.",
+           "Built the engineering team and participated in the recruiting and hiring effort"
+       ]
+    },
+    {
+       "logo": "/images/company-logos/bluefirecap.png",
+       "organization": "Blue Fire Capital, LLC",
+       "position": "Software Engineer",
+       "dates": "December, 2013 - April, 2015",
+       "summary": [
+            "Maintained real-time Profit and Loss reporting system.",
+            "Designed and developed data visualization projects that helped executives in decision making.",
+            "Created analytic web apps that could digest gigabytes of trade statistics and machine performance data."
+       ]
+    },
+    {
+       "logo": "/images/company-logos/cars.png",
+       "organization": "Cars.com",
+       "position": "Senior Front-End Developer",
+       "dates": "January 2013 - December 2015",
+       "summary": [
+            "Maintained Cars.com's homepage and many other entry pages such as the Buying Guide, Awards, Advice, Research, etc.",
+            "Led the Consumer Profile project to implement a prototype.",
+            "Provided technical insights in projects and helped planning and committing to deliverable."
+       ]
+    },
+    {
+       "logo": "/images/company-logos/guaranteed-rate.png",
+       "organization": "Guaranteed Rate",
+       "position": "Software Developer",
+       "dates": "August 2012 - January 2015",
+       "summary": [
+            "Designed and developed web services to replace existing technologies.",
+            "Led the CRM project to create a web application to replace the current software stack."
+       ]
+    },
+    {
+       "logo": "/images/company-logos/wearemammoth.png",
+       "organization": "We Are Mammoth",
+       "position": ".Net Developer/Web Developer",
+       "dates": "December 2011 - August 2012",
+       "summary": [
+           "Worked as consultant in a team environment to create professional service solutions for multiple high profile clients using C# and MSSQL.",
+           "Designed and implemented features such as instant CSV import and Drag&Drop upload for DoneDone, a popular issue tracker."
+       ]
+    },
+    {
+       "logo": "/images/company-logos/nexient.png",
+       "organization": "Systems In Motion/Nexient",
+       "position": "Web Developer",
+       "dates": "November 2010 - December 2011",
+       "summary": [
+           "Worked as an off-site consultant for multiple high profile clients such as Chegg.com, Best Buy."
+       ]
+    }
+]

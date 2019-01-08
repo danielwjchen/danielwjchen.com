@@ -22,11 +22,7 @@ class BasePage {
             },
             {
                 name: 'Resume',
-                url: '/resume/',
-            },
-            {
-                name: 'Contact',
-                url: '/contact/',
+                url: '/#resume',
             },
         ]
     }

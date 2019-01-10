@@ -1,0 +1,9 @@
+.container
+    .row
+        .col-lg-10.mx-lg-auto.mt-5
+            h1=meta.title
+            .text-muted.mb-5=meta.published
+            | !{content}
+    .row
+        .col-lg-10.mx-lg-auto.my-5
+            include ../../includes/about

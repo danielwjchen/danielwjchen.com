@@ -2,8 +2,9 @@ var path = require('path');
 
 class BasePage {
 
-    constructor(configs) {
+    constructor(configs, request) {
         this.configs = configs;
+        this.request = request;
     }
 
     getNavMenuItems() {
@@ -47,11 +48,11 @@ class BasePage {
         return '';
     }
 
-    get(request, response) {
+    get(response) {
         var context = {
             configs: this.configs,
             title: this.getTitle(),
-            request: request,
+            request: this.request,
             navMenuItems: this.getNavMenuItems(),
             content: this.getContent(),
             script: this.getScript(),

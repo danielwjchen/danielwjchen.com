@@ -1,54 +1,60 @@
-# Summary
-Medicr.us is built with angularJS 1.5 with custom gruntJS tasks. The goal is replace the custom gruntJS tasks with webpack and CommonJS `module` and `require`.
+## Summary
+Upgrading an old `angularJS 1.x` project with custom `grunt` tasks to `webpack` requires many changes, but it is absolutely worth it.
 
-# Goals
-* Replaces gruntJS tasks with webpack
-* Implements CommonJS `module` and `require`
-* Adds `sourcemap` support
-* Upgrades nodeJS and npm
+## Background and Motivations
+Medicr.us is built back in the late 2014, and not has been done since then. Because I use the same project setup for both professional and personal projects, the same setup in Medicr.us is also in a large production project that has over 2mb in source code. 
 
-# Background
-I built Medicr.us back in the late 2014, and I have not done much updates to the codebase since then. Medicr.us was a practice project to get myself familiar with angularJS 1.x, and npm and gruntJS, which were the hottest technologies back in the days. I finished it, uploaded it to digital ocean, and kind of just moved on.
+There are many problems with this `grunt` solution, such as lack of source-map, slow build time. However, the biggest problem is support. `angularJS 1.x` is designed when JavaScript did not have standardized way to manage dependencies. Instead, `angularJS 1.x` has its own dependency injection scheme, and that is completely replaced by ES6 `import/export` in `angular 2+`. It is not possible to upgrade without replacing the hacked together build scripts.
 
-I actually started using angularJS 1.x back in 2012. I used it to build a internal tool for the company I was working for at the time.
+## Current Architecture
+Medicr.us is separated into "pages" and "modules". While they both are `angularJS 1.x` modules, pages are independent from each other while modules are reusable pieces shared by pages.
 
-# Motivations
-I use the same project setup for both professional and personal projects, and the same GruntJS I used to build medicr.us is in some production projects I maintain for my job, with some minor upgrade every now and then. 
+```bash
+├── src
+│   ├── pages
+│   │   ├── page1
+│   │   │   ├── index.js
+│   │   │   ├── template.jade
+│   │   │   └── styles.scss
+│   │   └── page2
+│   │       ├── index.js
+│   │       ├── template.jade
+│   │       └── styles.scss
+│   └── modules
+│       ├── module1
+│       |   ├── index.js
+│       |   ├── feature1.js
+│       |   ├── feature1.jade
+│       |   ├── feature1.scss
+│       |   ├── feature2.js
+│       |   ├── feature2.jade
+│       |   └── feature2.scss
+│       └── module2
+│           ├── index.js
+│           ├── feature1.js
+│           ├── feature1.jade
+│           ├── feature1.scss
+│           ├── feature2.js
+│           ├── feature2.jade
+│           └── feature3.scss
+└── dist
+```
 
-The problems of staying with old tech is find support. The community has moved on, and finding someone that knows how to fix certain issues is hard. Not to mention the lack of support for new developer tools that boots productivity, such as sourcemap.
-
-Now that my day job is looking for a solution to migrate itself from the same tech stack, upgrading medicr.us to webpack is a prefect practice project.
-
-# Goals
-
-
-
-
-nodeJS
-npm
-
-
-0.10.42
-3.7.5
-
-## Architecture
-Medicr.us is organized by features with 3 static pages as “apps” with the admin never completed. Stylesheets, images, and JavaScripts are separated into each folder. The gruntJS tasks simply list all the javascripts and concat them together into 1 giant file and minify. There is no dependency resolution, and there is only 1 packaged script file for the entire site.
+The `grunt` tasks simply list all the javascripts and concat them together into 1 giant file and minify. There is no dependency resolution, and there is only 1 packaged script file for the entire site.
 
 angularJS templates are stored in separate jade files and manually added to the app’s jade template. That means each every time I want to include a directive, I will have to make sure I include the template file as well. It would be nice to use the pug-loader and have the template included automatically.
-
-I am removing the admin app and replacing it with django’s built-in admin site.
 
 Instead, I am going to utilize webpack’s multiple entry and named exports feature and create a bundle for each individual app.
 Install nvm and the latest node lts
 nvm is kind of similar to pip and virtualenv. The difference is, nvm does not support multiple environment of the same minor version. This only becomes a problem when there are two projects of the same version of node, and each project requires different version of the same package. 
 
 `nvm install 8`
-### Setup webpack
+#### Setup webpack
 We are going to install the most current webpack available to out at the moment which is version 4.
 
 `npm install --save-dev webpack webpack-cli`
  
-### Install `source-map-loader` to help development
+#### Install `source-map-loader` to help development
 
 `npm install --save-dev  source-map-loader `
 
@@ -60,24 +66,24 @@ I start with the home page first, which is the `/src/modules/Welcome/Module.js`.
 
 To solve this problem, I decided to disable the jshint and uglify gruntJS tasks.  
 
-## Passing Variables to pug templates
+### Passing Variables to pug templates
 Since jade is succeeded by pug, I will have to update the syntax to work with pug. 
 
 Medicr.us only has two “pages”, and they are both static htmls serving from `dist/`. With `HtmlWebpackPlugin`, I am able to compile static files with some modifications to the templates.
 
-## Getting Ready for Production
+### Getting Ready for Production
 [Webpack has an excellent tutorial on how to set up for production.](https://webpack.js.org/guides/production/) However, there are some additional setups due to medicr.us' unique design.
 
-### Getting `webpack-dev-server` to work with `HtmlWebpackPlugin`
+#### Getting `webpack-dev-server` to work with `HtmlWebpackPlugin`
 Because `HtmlWebpackPlugin` serves from memory instead of the files written on the `/dist` directory, `HtmlWebpackHarddiskPlugin` is needed to generate the two HTML files.
 
-```
+```bash
 npm install --save-dev html-webpack-harddisk-plugin
 ```
 
 See: https://stackoverflow.com/questions/49983799/the-affect-of-htmlwebpackplugin-on-webpack-dev-server
 
-# Conclusion
+## Conclusion
 Replacing gruntJS with Webpack 4 truly feels like an end of an era. Web development has come a long way since the I built my first website with `<iframe>` back in 1998. I feel great that an old dinosaur like me can still hang with kids! I had many goals for Medicr.us when I started the project more than 4.5 years ago, e.g. creating an isomorphic JavaScript application. Now with options such as ReactJS, Angular, TypeScript, and NativeScript, I look forward to the next chapter of this saga.
 
 Back in the days, I will have to hunt through several tutorials to put together how to add `uglify` or `cssmin`, or configure `less` or `sass` to minify the output. I am happy `webpack` is becoming the de facto standard.

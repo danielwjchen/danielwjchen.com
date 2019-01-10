@@ -13,8 +13,10 @@ module.exports = function(app) {
     app.set('views', './pages/');
 
     var HomePageClass = require(path.resolve(directory, 'home', 'page'));
-    var homePageInstance = new HomePageClass(configs);
-    app.get('/', homePageInstance.get.bind(homePageInstance));
+    app.get('/', function(request, response) {
+        var homePageInstance = new HomePageClass(configs, request);
+        homePageInstance.get(response)
+    });
 
     fs.readdirSync(directory).forEach(function(item) {
         if (item.startsWith('\.') || item.startsWith('_')) {
@@ -22,18 +24,20 @@ module.exports = function(app) {
         }
 
         var PageClass = require(path.resolve(directory, item, 'page'));
-        var pageInstance = new PageClass(configs);
 
         ['get', 'post',].forEach(function(method) {
             if (
-                !pageInstance[method] ||
-                typeof pageInstance[method] !== 'function'
+                !PageClass.prototype[method] ||
+                typeof PageClass.prototype[method] !== 'function'
             ) {
                 return;
             }
             app[method](
-                '/' + item + '/', 
-                pageInstance[method].bind(pageInstance)
+                new RegExp('^\/' + item + '\/(?!images\/)*'), 
+                function(request, response) {
+                    var pageInstance = new PageClass(configs, request);
+                    pageInstance[method](response);
+                }
             )
         });
     });

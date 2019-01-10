@@ -1,0 +1,5 @@
+{
+    "published": "2019-01-08",
+    "summary": "Webpack is now the defacto JavaScript build tool. This article documents the process of migrating a 2016 gruntJS project to take advantage of the current web development toolchain.",
+    "title": "Upgrading Old AngularJS + GruntJS Project to Webpack"
+}

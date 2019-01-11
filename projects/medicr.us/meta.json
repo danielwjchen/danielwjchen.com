@@ -1,0 +1,18 @@
+{
+    "published": "2014",
+    "title": "medicr.us",
+    "summary": "medicr.us is designed as a easy-to-use tool for digging through the hospital payment data collected by CMS.gov via federal government programs such as Medicare, Medicaid, the Children's Health Insurance Program, the Health Insurance Marketplace, etc. ",
+    "url": "https://medicr.us",
+    "tags": [
+        "angularJS 1.x",
+        "bootstrap 3.x",
+        "leaflet",
+        "grunt",
+        "SQLite",
+        "nginx",
+        "Python 2.7.x",
+        "Django 1.5.x",
+        "Django REST framework 2.4.x",
+        "Ubuntu 14.04"
+    ]
+}

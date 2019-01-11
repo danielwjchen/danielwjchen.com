@@ -33,7 +33,7 @@ module.exports = function(app) {
                 return;
             }
             app[method](
-                new RegExp('^\/' + item + '\/(?!images\/)*'), 
+                new RegExp('^\/' + item + '\/([0-9a-zA-Z\-]*\/(?!images\/).+|)'),
                 function(request, response) {
                     var pageInstance = new PageClass(configs, request);
                     pageInstance[method](response);

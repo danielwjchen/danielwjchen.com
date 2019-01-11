@@ -1,0 +1,9 @@
+{
+    "published": "2017",
+    "title": "Donald's Bizarre Adventure",
+    "summary": "Donald's Bizarre Adventure is a side-scrolling HTML5 game.",
+    "tags" : [
+        "webpack",
+        "PixiJS"
+    ]
+}

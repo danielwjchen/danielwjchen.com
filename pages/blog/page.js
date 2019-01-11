@@ -1,5 +1,5 @@
 var fs = require('fs');
-var MarkdownIt = require( "markdown-it");
+var marky = require( "marky-markdown");
 var path = require('path');
 var pug = require('pug');
 
@@ -7,7 +7,6 @@ var BasePage = require('../_base/page');
 var CATALOG_TEMPLATE_PATH = path.resolve(__dirname, 'catalog.pug');
 var BLOG_TEMPLATE_PATH = path.resolve(__dirname, 'blog.pug');
 var BLOG_FOLDER_PATH = path.resolve(__dirname, '../../', 'blogs');
-var markdown = new MarkdownIt();
 
 class BlogPage extends BasePage {
 
@@ -41,7 +40,7 @@ class BlogPage extends BasePage {
         context.meta = JSON.parse(fs.readFileSync(blogMetaFilePath));
         var blogContentFilePath = path.resolve(blogFolder, 'content.md');
         var markdownContent = fs.readFileSync(blogContentFilePath, "utf8");
-        context.content = markdown.render(markdownContent);
+        context.content = marky(markdownContent);
         return pug.renderFile(BLOG_TEMPLATE_PATH, context);
     }
 
@@ -56,6 +55,14 @@ class BlogPage extends BasePage {
         } else {
             return this.getCatalog();
         }
+    }
+
+    getStyles() {
+        return '/dist/blog.css';
+    }
+
+    getScript() {
+        return '/dist/blog.bundle.js';
     }
 }
 

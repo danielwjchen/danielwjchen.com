@@ -1,0 +1,346 @@
+@import './colors';
+
+a.anchor {
+  float: left;
+  margin-right: 4px;
+  margin-left: -20px;
+  .octicon {
+    visibility: hidden;
+  }
+  &:hover {
+    .octicon {
+      visibility: visible;
+    }
+  }
+}
+.editor {
+	padding: 8px;
+	.invisible-character {
+		color: $color_pumice_20_approx;
+	}
+	.indent-guide {
+		color: $color_pumice_20_approx;
+	}
+	.wrap-guide {
+		background-color: $color_pumice_10_approx;
+	}
+	.gutter {
+		background-color: $color_baltic_sea_approx;
+		.cursor-line {
+			background-color: $white_14;
+		}
+		.line-number {
+			&.folded {
+				color: $lavender_rose;
+			}
+			&:after {
+				color: $lavender_rose;
+			}
+		}
+	}
+	.invisible {
+		color: $color_pumice_approx;
+	}
+	.cursor {
+		border-color: $white;
+	}
+	.gfm {
+		.link {
+			color: $color_fuscous_gray_approx;
+			.entity {
+				color: $color_alto_approx;
+			}
+		}
+		.raw {
+			color: $color_silver_chalice_approx;
+		}
+		.markup.heading {
+			color: $color_gallery_approx;
+		}
+		.variable.list {
+			color: $color_fuscous_gray_approx;
+		}
+		.support.quote {
+			color: $color_fuscous_gray_approx;
+		}
+	}
+	.markdown {
+		.paragraph {
+			color: $color_mountain_mist_approx;
+		}
+		.heading {
+			color: $color_gallery_approx;
+		}
+		.raw {
+			color: $color_silver_chalice_approx;
+		}
+		.link {
+			color: $color_fuscous_gray_approx;
+			.string {
+				color: $color_fuscous_gray_approx;
+				&.title {
+					color: $color_alto_approx;
+				}
+			}
+		}
+	}
+	.line-number.cursor-line-no-selection {
+		background-color: $white_14;
+	}
+	.fold-marker:after {
+		color: $lavender_rose;
+	}
+	.selection .region {
+		background-color: $color_tundora_approx;
+	}
+	.source.gfm {
+		color: $color_mountain_mist_approx;
+	}
+	.search-results .marker {
+		.region {
+			background-color: transparent;
+			border: 1px solid $color_suva_gray_approx;
+		}
+		&.current-result .region {
+			border: 1px solid $white;
+		}
+	}
+}
+.editor-colors {
+	background-color: $color_mirage_approx;
+	color: $color_pumice_approx;
+}
+.bracket-matcher {
+	border-bottom: 1px solid $color_golden_sand_approx;
+	margin-top: -1px;
+	opacity: .7;
+}
+.comment {
+	color: $color_concord_approx;
+}
+.entity {
+	color: $color_corvette_approx;
+	&.name {
+		&.type {
+			text-decoration: underline;
+			color: $color_portafino_approx;
+		}
+		&.tag.namespace {
+			color: $color_copperfield_approx;
+		}
+	}
+	&.other {
+		&.inherited-class {
+			color: $color_paarl_approx;
+		}
+		&.attribute-name {
+			color: $color_light_apricot_approx;
+			&.namespace {
+				color: $color_copperfield_approx;
+			}
+		}
+	}
+}
+.keyword {
+	color: $color_cornflower_approx;
+	&.control {
+		color: $color_cornflower_approx;
+	}
+	&.operator {
+		color: $color_gallery_approx;
+	}
+}
+.storage {
+	color: $color_pine_glade_approx;
+	&.modifier {
+		color: $color_cornflower_approx;
+	}
+}
+.constant {
+	color: $color_granny_smith_apple_approx;
+	&.numeric {
+		color: $color_blush_pink_approx;
+	}
+}
+.variable {
+	color: $color_melrose_approx;
+}
+.invalid {
+	&.deprecated {
+		text-decoration: underline;
+		color: $color_pink_flamingo_approx;
+	}
+	&.illegal {
+		color: $color_pink_flamingo_approx;
+		background-color: $color_voodoo_75_approx;
+	}
+}
+.source {
+	.string {
+		.source {
+			color: $color_gallery_approx;
+		}
+		.meta.embedded.line {
+			color: $color_gallery_approx;
+		}
+		.punctuation.section.embedded {
+			color: $color_persian_green_approx;
+			.source {
+				color: $color_persian_green_approx;
+			}
+		}
+	}
+	.entity {
+		&.name.tag {
+			color: $color_cornflower_approx;
+		}
+		&.other.attribute-name {
+			color: $color_cornflower_approx;
+		}
+	}
+}
+.string {
+	color: $color_conifer_approx;
+	.constant {
+		color: $color_persian_green_approx;
+	}
+	&.regexp {
+		color: $color_equator_approx;
+		&.group {
+			color: $color_roti_approx;
+			background-color: $white_6;
+		}
+		&.character-class {
+			color: $color_alpine_approx;
+		}
+		.constant.character.escape {
+			color: $color_flush_orange_approx;
+		}
+		.source.ruby.embedded {
+			color: $color_flush_orange_approx;
+		}
+		.string.regexp.arbitrary-repitition {
+			color: $color_flush_orange_approx;
+		}
+	}
+	.variable {
+		color: $color_mantle_approx;
+	}
+}
+.support {
+	color: $color_portafino_approx;
+	&.function {
+		color: $color_putty_approx;
+	}
+	&.constant {
+		color: $color_corvette_approx;
+	}
+	&.type.property-name.css {
+		color: $color_gallery_approx;
+	}
+}
+.meta {
+	&.tag {
+		color: $color_cornflower_approx;
+		&.inline {
+			color: $color_cornflower_approx;
+			.entity {
+				color: $color_cornflower_approx;
+			}
+		}
+		.entity {
+			color: $color_cornflower_approx;
+		}
+	}
+	&.preprocessor {
+		&.c {
+			color: $color_regent_gray_approx;
+			.keyword {
+				color: $color_pigeon_post_approx;
+			}
+		}
+		&.at-rule .keyword.control.at-rule {
+			color: $color_regent_gray_approx;
+		}
+	}
+	&.cast {
+		color: $color_ironside_gray_approx;
+	}
+	&.xml-processing {
+		color: $color_gravel_approx;
+		.entity {
+			color: $color_gravel_approx;
+		}
+		.string {
+			color: $color_gravel_approx;
+		}
+	}
+	&.property-value {
+		.constant {
+			color: $color_de_york_approx;
+		}
+		.support.constant {
+			&.property-value.css {
+				color: $color_picasso_approx;
+			}
+			&.named-color.css {
+				color: $color_de_york_approx;
+			}
+		}
+	}
+	&.diff {
+		color: $color_desert_storm_approx;
+		background-color: $color_firefly_approx;
+		&.header {
+			color: $color_desert_storm_approx;
+			background-color: $color_firefly_approx;
+		}
+	}
+	&.separator {
+		color: $color_apple_approx;
+		background-color: $color_shark_approx;
+	}
+	&.line {
+		&.entry.logfile {
+			background-color: $color_gallery_16_approx;
+		}
+		&.exit.logfile {
+			background-color: $color_gallery_16_approx;
+		}
+		&.error.logfile {
+			background-color: $color_dark_burgundy_approx;
+		}
+	}
+	&.sgml.html .meta.doctype {
+		color: $color_gravel_approx;
+		.entity {
+			color: $color_gravel_approx;
+		}
+		.string {
+			color: $color_gravel_approx;
+		}
+	}
+	&.selector.css .entity {
+		&.name.tag {
+			text-decoration: underline;
+			color: $color_cornflower_approx;
+		}
+		&.other.attribute-name {
+			&.id {
+				color: $color_bali_hai_approx;
+			}
+			&.class {
+				color: $color_cornflower_blue_approx;
+			}
+			&.tag.pseudo-class {
+				color: $color_avocado_approx;
+			}
+		}
+	}
+	&.property-group .support.constant.property-value.css {
+		color: $color_picasso_approx;
+	}
+	&.constructor.argument.css {
+		color: $color_avocado_approx;
+	}
+}

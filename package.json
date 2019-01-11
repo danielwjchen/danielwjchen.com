@@ -15,6 +15,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/s1300045/danielwjchen.com#readme",
   "devDependencies": {
+    "apply-loader": "^2.0.0",
     "css-loader": "^2.1.0",
     "jshint": "^2.9.7",
     "jshint-loader": "^0.8.4",
@@ -31,7 +32,7 @@
     "bootstrap": "^4.2.1",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
-    "markdown-it": "^8.4.2",
+    "marky-markdown": "^11.3.2",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0"
   }

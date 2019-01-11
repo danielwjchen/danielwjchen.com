@@ -2,14 +2,16 @@
 Upgrading an old `angularJS 1.x` project with custom `grunt` tasks to `webpack` requires many changes, but it is absolutely worth it.
 
 ## Background and Motivations
-Medicr.us is built back in the late 2014, and not has been done since then. Because I use the same project setup for both professional and personal projects, the same setup in Medicr.us is also in a large production project that has over 2mb in source code. 
+A `angularJS 1.x` projectin production  built with `grunt` is slow. The project has over 8mb in source code, and `grunt` takes over 15 seconds to build on my 2012 machine with i5 and 16GB of ram. 
 
-There are many problems with this `grunt` solution, such as lack of source-map, slow build time. However, the biggest problem is support. `angularJS 1.x` is designed when JavaScript did not have standardized way to manage dependencies. Instead, `angularJS 1.x` has its own dependency injection scheme, and that is completely replaced by ES6 `import/export` in `angular 2+`. It is not possible to upgrade without replacing the hacked together build scripts.
+Besides, `angularJS 1.x` is old - it is designed when `JavaScript` did not have a standard to manage dependencies. `angularJS 1.x` has its own dependency injection scheme, and that is completely replaced by ES6 `import/export` in `angular 2+`. A partial rewrite is neccessary in every scenario.
 
-## Current Architecture
-Medicr.us is separated into "pages" and "modules". While they both are `angularJS 1.x` modules, pages are independent from each other while modules are reusable pieces shared by pages.
+However, I need a game plan and validation before ripping everything apart due to the size of the project. Luckly, I use the same toolchain for both professional and personal projects, and I decided to use [medicr.us](https://medicr.us) as the guinea pig.
 
-```bash
+## The Problem
+[medicr.us](https://medicr.us) is divided into "pages" and "modules". While they both are `angularJS 1.x` modules, each page folder is independent and serves a single purpose, while modules are reusable pieces shared by pages.
+
+```sh
 ├── src
 │   ├── pages
 │   │   ├── page1
@@ -40,52 +42,117 @@ Medicr.us is separated into "pages" and "modules". While they both are `angularJ
 └── dist
 ```
 
-The `grunt` tasks simply list all the javascripts and concat them together into 1 giant file and minify. There is no dependency resolution, and there is only 1 packaged script file for the entire site.
+To build the project, custom `grunt` tasks scan the folders for all the javascripts and concatenate them together. The `index.js` is always the first to be concatenated because it contains the `angularJS 1.x` module definition.
 
-angularJS templates are stored in separate jade files and manually added to the app’s jade template. That means each every time I want to include a directive, I will have to make sure I include the template file as well. It would be nice to use the pug-loader and have the template included automatically.
+`SCSS` files are simply concated into one file with no specific order and passed to the processor.
 
-Instead, I am going to utilize webpack’s multiple entry and named exports feature and create a bundle for each individual app.
-Install nvm and the latest node lts
-nvm is kind of similar to pip and virtualenv. The difference is, nvm does not support multiple environment of the same minor version. This only becomes a problem when there are two projects of the same version of node, and each project requires different version of the same package. 
+`angularJS 1.x` templates are stored in separate `jade` files. A custom `grunt` task would read the each inidividual template, process it to `html`, transform the content into `javascript` that wraps everything in a `$templateCache.put()` call, and append the the content to the `index.js` of the folder.
 
-`nvm install 8`
-#### Setup webpack
-We are going to install the most current webpack available to out at the moment which is version 4.
-
-`npm install --save-dev webpack webpack-cli`
- 
-#### Install `source-map-loader` to help development
-
-`npm install --save-dev  source-map-loader `
-
-Configure
-Install source-map-loader to help development
-
-Migrate to webpack
-I start with the home page first, which is the `/src/modules/Welcome/Module.js`. The first problem I ran into was the existing architecture. The website is served as static HTML from the `/dist` folder,  and the `<script>` tags have to be modified to refer to the new bundles. To apply the changes with `<script>` tags, I will have to run gruntJS tasks, and the gruntJS tasks fail because of the CommonJS `module.exports` statement.
-
-To solve this problem, I decided to disable the jshint and uglify gruntJS tasks.  
-
-### Passing Variables to pug templates
-Since jade is succeeded by pug, I will have to update the syntax to work with pug. 
-
-Medicr.us only has two “pages”, and they are both static htmls serving from `dist/`. With `HtmlWebpackPlugin`, I am able to compile static files with some modifications to the templates.
-
-### Getting Ready for Production
-[Webpack has an excellent tutorial on how to set up for production.](https://webpack.js.org/guides/production/) However, there are some additional setups due to medicr.us' unique design.
-
-#### Getting `webpack-dev-server` to work with `HtmlWebpackPlugin`
-Because `HtmlWebpackPlugin` serves from memory instead of the files written on the `/dist` directory, `HtmlWebpackHarddiskPlugin` is needed to generate the two HTML files.
-
-```bash
-npm install --save-dev html-webpack-harddisk-plugin
+For example:
+```pug
+h1 Hello {{foo}}!
 ```
 
-See: https://stackoverflow.com/questions/49983799/the-affect-of-htmlwebpackplugin-on-webpack-dev-server
+Now becomes:
+```js
+angular.module('module2').run(function($templateCache) {
+    $templateCache.put('feature.jade', '<h1>Hello {{foo}}!</h1>');
+});
+```
 
-## Conclusion
-Replacing gruntJS with Webpack 4 truly feels like an end of an era. Web development has come a long way since the I built my first website with `<iframe>` back in 1998. I feel great that an old dinosaur like me can still hang with kids! I had many goals for Medicr.us when I started the project more than 4.5 years ago, e.g. creating an isomorphic JavaScript application. Now with options such as ReactJS, Angular, TypeScript, and NativeScript, I look forward to the next chapter of this saga.
+## The Solution
 
-Back in the days, I will have to hunt through several tutorials to put together how to add `uglify` or `cssmin`, or configure `less` or `sass` to minify the output. I am happy `webpack` is becoming the de facto standard.
+First, all the `javascript` files have to rewritten. ES6 `import/export` statements will be handling the dependencies , instead of relying on `angularJS 1.x` to manage dependency injections. Each `feature.js` file will now export itself.
 
-I am also glad to see `sass` beat out `less` to win the standard war. Not that I have a preference, I have lived through `prototype` vs `jquery`, `bower` vs `npm`, `grunt` vs `gulp`, etc. It's just a huge hassle when the developers have to choose sides. It really cuts into my time to argue how PS4 is so much surperior than XBox One.
+```js
+/**
+ * Using feature1.js as example directive
+ */
+import './styles1.scss';
+// jade is renamed pug due to trademark dispute
+import template from './template1.pug'; 
+
+export default function() {
+    return {
+        template: template,
+        restrict: 'E',
+        scope: {},
+        controller: function($scope) {
+            // do stuff
+        },
+    };
+};
+```
+
+The `index.js` for each module glues all the feature files togther.
+
+```js
+/**
+ * Using module1 as example
+ */
+import 'angular';
+
+const MODULE_NAME = 'module1';
+
+import feature1 from './feature1.js';
+import feature2 from './feature2.js';
+import feature3 from './feature3.js';
+
+angular.module(MODULE_NAME, [])
+.directive('feature1', feature1)
+.directive('feature2', feature2)
+.directive('feature3', feature3)
+;
+
+exports default MODULE_NAME;
+```
+
+The `index.js` for each page will now serve as the entry.
+
+```js
+/**
+ * Example webpack config
+ */
+const path = require('path');
+
+const PAGE_FOLDER = path.resolve(__dirname, 'src', 'pages');
+
+module.exports = {
+    entry: {
+        'page1': 
+            path.resolve(PAGE_FOLDER, 'page1'),
+        'page2': 
+            path.resolve(PAGE_FOLDER, 'page2'),
+    },
+};
+```
+
+```js
+/**
+ * Using page1 as an example
+ */
+import 'angular';
+import './styles.scss';
+
+const MODULE_NAME = 'PAGE_1';
+
+import module1 from '../../modules/module1';
+import module2 from '../../modules/module2';
+import module3 from '../../modules/module3';
+
+angular(MODULE_NAME, [
+    module1,
+    module2,
+    module3,
+])
+;
+
+exports default MODULE_NAME;
+```
+
+## Results
+The performance imporvement after eplacing `grunt` and `angularJS 1.x` dependency injection with `webpack` and ES6 `export/import` statement is drastic. [medicr.us](https://medicr.us) is small, so the difference isn't noticeable. However, the ~8mb project that used to take over 15 seconds to build now only take less that 2 seconds for a cold start. Subsequnet builds take less than 500ms! 
+
+This alone is worth the 2 weeks dedicated to rewriting each file. I created a `python` script to help automate most of the rewrite, but the lack of tests proves to be a major bottleneck in getting the project to production shape.
+
+It truly feels like an end of an era. Web development has come a long way since the I built my first website with `<iframe>` back in 1998. I feel great that an old dinosaur like me can still hang with kids! I had many goals for [medicr.us](https://medicr.us) when I started the project more than 4.5 years ago, e.g. creating an isomorphic JavaScript application. Now with options such as ReactJS, Angular, TypeScript, and NativeScript, I look forward to the next chapter of this saga.

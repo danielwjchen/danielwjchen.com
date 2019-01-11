@@ -14,9 +14,7 @@ nav.navbar.navbar-expand-sm.navbar-light.bg-light
     div.navbar-collapse.collapse#navbar
         ul.navbar-nav.navbar-right
             each item in navMenuItems
-                li.nav-item(
-                    class=request.path.startsWith(item.url) ? "active" : ""
-                )
+                li.nav-item
                     a.nav-link(
                         href=item.url
                     )=item.name

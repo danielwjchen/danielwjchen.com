@@ -154,5 +154,3 @@ exports default MODULE_NAME;
 The performance imporvement after eplacing `grunt` and `angularJS 1.x` dependency injection with `webpack` and ES6 `export/import` statement is drastic. [medicr.us](https://medicr.us) is small, so the difference isn't noticeable. However, the ~8mb project that used to take over 15 seconds to build now only take less that 2 seconds for a cold start. Subsequnet builds take less than 500ms! 
 
 This alone is worth the 2 weeks dedicated to rewriting each file. I created a `python` script to help automate most of the rewrite, but the lack of tests proves to be a major bottleneck in getting the project to production shape.
-
-It truly feels like an end of an era. Web development has come a long way since the I built my first website with `<iframe>` back in 1998. I feel great that an old dinosaur like me can still hang with kids! I had many goals for [medicr.us](https://medicr.us) when I started the project more than 4.5 years ago, e.g. creating an isomorphic JavaScript application. Now with options such as ReactJS, Angular, TypeScript, and NativeScript, I look forward to the next chapter of this saga.

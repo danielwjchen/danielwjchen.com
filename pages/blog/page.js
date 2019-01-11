@@ -20,6 +20,9 @@ class BlogPage extends BasePage {
         };
         fs.readdirSync(BLOG_FOLDER_PATH).forEach(function(blogId) {
             var blogMetaFilePath = path.resolve(BLOG_FOLDER_PATH, blogId, 'meta.json');
+            if (!fs.existsSync(blogMetaFilePath)) {
+                return;
+            }
             var blogMeta = JSON.parse(fs.readFileSync(blogMetaFilePath));
             if (!blogMeta.published) {
                 return;
@@ -29,6 +32,7 @@ class BlogPage extends BasePage {
                 summary: blogMeta.summary,
                 title: blogMeta.title,
                 published: blogMeta.published,
+                tags: blogMeta.tags,
             });
         });
         return pug.renderFile(CATALOG_TEMPLATE_PATH, context);

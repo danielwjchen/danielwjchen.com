@@ -5,6 +5,13 @@
             .text-muted.mb-5=meta.published
             | !{content}
     .row
+        .col-lg-10.mx-lg-auto
+            ul.list-inline
+                each tag in meta.tags
+                    li.list-inline-item
+                        span.badge-secondary.badge=tag
+
+    .row
         .col-lg-10.mx-lg-auto.my-5
             include ../../includes/about
 link(

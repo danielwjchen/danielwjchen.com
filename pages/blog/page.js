@@ -29,12 +29,22 @@ class BlogPage extends BasePage {
             }
             context.blogs.push({
                 id: blogId,
-                summary: blogMeta.summary,
-                title: blogMeta.title,
-                published: blogMeta.published,
-                tags: blogMeta.tags,
+                meta: blogMeta,
             });
         });
+        context.blogs.sort(function(a, b) {
+            var aPublishedDate = new Date(a.meta.published);
+            var bPublishedDate = new Date(b.meta.published);
+            if (aPublishedDate < bPublishedDate) {
+                return -1;
+            }
+            if (aPublishedDate > bPublishedDate) {
+                return 1;
+            }
+
+            return 0;
+        });
+        context.blogs.reverse();
         return pug.renderFile(CATALOG_TEMPLATE_PATH, context);
     }
 

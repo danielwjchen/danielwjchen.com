@@ -1,7 +1,8 @@
 {
     "published": "2017",
     "title": "Donald's Bizarre Adventure",
-    "summary": "Donald's Bizarre Adventure is a side-scrolling HTML5 game.",
+    "url": "http://donaldsbizarreadventure.com/",
+    "summary": "Donald's Bizarre Adventure is a side-scrolling HTML5 game. I did everything from drawing the characters on a piece of paper to implmenting the gameplay in javascript.",
     "tags" : [
         "webpack",
         "PixiJS"

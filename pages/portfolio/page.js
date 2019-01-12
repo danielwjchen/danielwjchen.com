@@ -31,6 +31,19 @@ class PortfolioPage extends BasePage {
                 meta: meta,
             });
         });
+        context.portfolio.sort(function(a, b) {
+            var aPublishedDate = new Date(a.meta.published);
+            var bPublishedDate = new Date(b.meta.published);
+            if (aPublishedDate < bPublishedDate) {
+                return -1;
+            }
+            if (aPublishedDate > bPublishedDate) {
+                return 1;
+            }
+
+            return 0;
+        });
+        context.portfolio.reverse();
         return pug.renderFile(CONTENT_FILE_PATH, context);
     }
 

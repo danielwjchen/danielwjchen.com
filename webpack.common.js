@@ -26,26 +26,6 @@ module.exports = {
         use: ["apply-loader", "pug-loader",],
         enforce: "pre"
       },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: "style-loader", 
-          }, 
-          {
-            loader: "css-loader", 
-            options: {
-              sourceMap: false,
-            },
-          }, 
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: false,
-            },
-          },
-        ],
-      },
     ],
   },
 };

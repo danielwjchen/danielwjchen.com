@@ -1,0 +1,11 @@
+/**
+ * Defines /portfolio/ styles
+ */
+@import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
+.portfolio {
+    @include media-breakpoint-down(xs) {
+        .media {
+            flex-direction: column;
+        }
+    }
+}

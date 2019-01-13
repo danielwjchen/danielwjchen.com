@@ -1,4 +1,4 @@
-.container
+.portfolio.container
     .row
         .col-lg-10.mx-lg-auto
             h1.lead.mt-5
@@ -6,12 +6,12 @@
             ul.list-unstyled.mt-5
                 each project in portfolio
                     li.media.mb-5
-                        img.mr-4(
+                        img.mx-auto.mx-sm-0.mb-2.mb-sm-0(
                             src="/projects/" + project.id + "/images/screenshot.png"
                             width="240"
                             alt=project.meta.title + ' screenshot'
                         )
-                        .media-body
+                        .media-body.ml-4
                             a.text-reset.text-decoration-none(
                                 href=project.meta.url
                             )

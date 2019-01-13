@@ -47,6 +47,14 @@ class PortfolioPage extends BasePage {
         return pug.renderFile(CONTENT_FILE_PATH, context);
     }
 
+    getScript() {
+        return '/dist/portfolio.bundle.js';
+    }
+
+    getStyles() {
+        return '/dist/portfolio.css';
+    }
+
 }
 
 module.exports = PortfolioPage;

@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     'home': path.resolve(pagesFolder, 'home'),
     'blog': path.resolve(pagesFolder, 'blog'),
+    'portfolio': path.resolve(pagesFolder, 'portfolio'),
   },
   output: {
     filename: '[name].bundle.js',

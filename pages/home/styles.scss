@@ -15,3 +15,10 @@
     background-position: cover;
     text-shadow: 0 0 8px black;
 }
+#about {
+    @include media-breakpoint-down(xs) {
+        .media {
+            flex-direction: column;
+        }
+    }
+}

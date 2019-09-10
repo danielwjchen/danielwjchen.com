@@ -1,63 +1,70 @@
 //- SEO meta tags
 meta(
     name="title"
-    content="#{configs.site}"
-)
-meta(
-    name="description"
-    content="#{page.description}"
-)
-meta(
-    name="keywords"
-    content="#{configs.keywords}"
-)
-link(
-    rel="canonical"
-    href="#{page.canonical_url}"
-)
-
-meta(
-    property="fb:app_id"
-    content="#{configs.facebook.appId}"
-)
-meta(
-    property="og:url"
-    content="#{page.canonical_url}"
+    content=configs.site
 )
 meta(
     property="og:site_name"
-    content="#{configs.site}"
+    content=configs.site
 )
 meta(
-    property="og:title"
-    content="#{page.title} - #{configs.site}"
+    name="twitter:site"
+    content=configs.twitter.site
 )
-meta(
-    property="og:description"
-    content="#{page.description}"
-)
-meta(
-    property="og:image"
-    content="#{page.image}"
-)
+if configs.keywords
+    meta(
+        name="keywords"
+        content=configs.keywords
+    )
+if page 
+    if page.description
+        meta(
+            name="description"
+            content=page.description
+        )
+        meta(
+            property="og:description"
+            content=page.description
+        )
+        meta(
+            name="twitter:description"
+            content=page.description
+        )
+    if page.title
+        meta(
+            property="og:title"
+            content=page.title + ' - ' configs.site
+        )
+        meta(
+            name="twitter:title"
+            content=page.title + " - " + configs.site
+        )
+    if page.image
+        meta(
+            property="og:image"
+            content=page.image
+        )
+        meta(
+            name="twitter:image"
+            content=page.image
+        )
+if page && page.canonical_url
+    link(
+        rel="canonical"
+        href=page.canonical_url
+    )
+    meta(
+        property="og:url"
+        content=page.canonical_url
+    )
+
+if configs.facebook && configs.facebook.appId
+    meta(
+        property="fb:app_id"
+        content=configs.facebook.appId
+    )
 
 meta(
     name="twitter:card"
     content="summary"
-)
-meta(
-    name="twitter:site"
-    content="#{configs.twitter.site}"
-)
-meta(
-    name="twitter:title"
-    content="#{page.title} - #{configs.site}"
-)
-meta(
-    name="twitter:description"
-    content="#{page.description}"
-)
-meta(
-    name="twitter:image"
-    content="#{page.image}"
 )

@@ -1,0 +1,15 @@
+{
+    "published": "2014",
+    "title": "drunkspiration.us",
+    "summary": "Heard of \"fitspiration\"? That is what drunkspiration is. Combining motivational fitness quotes with a hardcore drinking ethic, I created this Instagram clone that let user apply filters on photos of drunk people with inspirational quote.",
+    "url": "https://drunkspiration.us",
+    "tags": [
+        "bootstrap 3.x",
+        "jquery",
+        "grunt",
+        "nginx",
+        "Python 2.7.x",
+        "Django 1.8.x",
+        "Ubuntu 14.04"
+    ]
+}

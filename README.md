@@ -29,3 +29,9 @@ Remeber to make appropriate changes.
 ```
 cp configs.exampe.json configs.json
 ```
+
+### Start service
+Run the following command to start service for development.
+```
+npm run develop
+```

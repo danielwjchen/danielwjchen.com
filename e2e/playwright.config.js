@@ -49,7 +49,7 @@ module.exports = defineConfig({
   },
   webServer: isLocalTarget
     ? {
-        command: 'bash e2e/start-dev-server.sh',
+        command: 'npm run develop',
         cwd: repoRoot,
         url: 'http://127.0.0.1:8080',
         reuseExistingServer: !process.env.CI,

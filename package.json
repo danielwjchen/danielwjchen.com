@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node index.js",
     "develop": "webpack serve --config webpack.dev.js",
-    "deploy": "webpack --config webpack.prod.js"
+    "deploy": "webpack --config webpack.prod.js",
+    "test": "playwright test --config e2e/playwright.config.js",
+    "test:headed": "playwright test --headed --config e2e/playwright.config.js",
+    "test:update": "playwright test --update-snapshots --config e2e/playwright.config.js",
+    "baseline:prod": "BASE_URL=https://danielwjchen.com playwright test --update-snapshots --config e2e/playwright.config.js",
+    "report": "playwright show-report e2e/playwright-report"
   },
   "repository": {
     "type": "git",
@@ -19,6 +24,7 @@
   },
   "homepage": "https://bitbucket.org/s1300045/danielwjchen.com#readme",
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "css-loader": "^7.1.5",
     "sass": "^1.104.1",
     "sass-loader": "^17.0.1",

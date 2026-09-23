@@ -33,8 +33,9 @@ npm start
 Visual-regression E2E tests (Playwright) live in `e2e/` and compare the dev
 site against production baselines. See `E2E-TESTING.md` for details.
 
+The suite is part of the root package (no separate `e2e/` install), so the
+root `npm install` above already provides it. Run from the repo root:
+
 ```
-cd e2e
-npm install
 npm test
 ```

@@ -2,24 +2,33 @@
 #
 # Starts the site dev server under the Node version pinned by the root .nvmrc.
 #
-# WHY: the project builds with webpack 4 + webpack-dev-server 3, whose `spdy`
-# dependency calls process.binding('http_parser') — removed in modern Node.
-# `npm run develop` therefore only works on the legacy Node the project pins
-# (v8.17.0). The Playwright *runner* runs on a modern node; only this dev
-# server subprocess needs the legacy node, so we select it explicitly rather
-# than relying on whatever `node` is first on PATH.
+# WHY: the Playwright runner and the dev server both need a modern Node, but the
+# dev server must run the pinned version rather than whatever `node` is first
+# on PATH, so this script selects it explicitly from the nvm install.
+#
+# .nvmrc may hold a major version (e.g. "24") or an exact one (e.g. "v24.21.0");
+# a major version resolves to the newest matching installed release.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VERSION="$(tr -d '[:space:]' < "$ROOT/.nvmrc")"
 NVM_ROOT="${NVM_DIR:-/usr/local/nvm}"
-NODE_BIN_DIR="$NVM_ROOT/versions/node/$VERSION/bin"
+VERSION="${VERSION#v}"
 
-if [ ! -x "$NODE_BIN_DIR/node" ]; then
-  echo "[start-dev-server] node $VERSION not found at $NODE_BIN_DIR" >&2
-  echo "[start-dev-server] Set NVM_DIR to your nvm root, or start the dev server" >&2
-  echo "                  manually with the pinned node on PATH, e.g.:" >&2
-  echo "    PATH=<path-to-node-$VERSION>/bin:\$PATH npm --prefix \"$ROOT\" run develop" >&2
+NODE_BIN_DIR=""
+if [ -x "$NVM_ROOT/versions/node/v$VERSION/bin/node" ]; then
+  NODE_BIN_DIR="$NVM_ROOT/versions/node/v$VERSION/bin"
+else
+  BEST="$(ls -d "$NVM_ROOT/versions/node/v$VERSION".* 2>/dev/null | sort -V | tail -n 1 || true)"
+  if [ -n "$BEST" ] && [ -x "$BEST/bin/node" ]; then
+    NODE_BIN_DIR="$BEST/bin"
+  fi
+fi
+
+if [ -z "$NODE_BIN_DIR" ]; then
+  echo "[start-dev-server] node $VERSION not found under $NVM_ROOT/versions/node" >&2
+  echo "[start-dev-server] Install it with nvm (e.g. 'nvm install $VERSION'), or" >&2
+  echo "                  set NVM_DIR to your nvm root." >&2
   exit 1
 fi
 

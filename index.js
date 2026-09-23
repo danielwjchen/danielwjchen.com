@@ -7,7 +7,6 @@ var app = express();
 var port = configs.port;
 var hostname = '127.0.0.1';
 
-app.set('view engine', 'jade');
 app.set('views', path.resolve(__dirname, 'pages'));
 
 PageFactory(app);

@@ -1,5 +1,5 @@
 var fs = require('fs');
-var marky = require( "marky-markdown");
+var marky = require( "@npmcorp/marky-markdown");
 var path = require('path');
 var pug = require('pug');
 

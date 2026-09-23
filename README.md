@@ -35,3 +35,13 @@ Run the following command to start service for development.
 ```
 npm run develop
 ```
+
+## E2E tests
+Visual-regression E2E tests (Playwright) live in `e2e/` and compare the dev
+site against production baselines. See `E2E-TESTING.md` for details.
+
+```
+cd e2e
+npm install
+npm test
+```
